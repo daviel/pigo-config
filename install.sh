@@ -55,7 +55,7 @@ systemctl start pigogui.service
 systemctl start lightdisplay.service
 systemctl start fbcp.service
 
-apt remove -y userconf-pi triggerhappy firmware-atheros firmware-libertas gcc-10 g++-10 cpp-10 gdb firmware-misc-nonfree manpages-dev git locales firmware-realtek manpages-dev manpages iso-codes
+apt remove -y userconf-pi triggerhappy firmware-atheros firmware-libertas gcc-10 g++-10 cpp-10 gdb firmware-misc-nonfree manpages-dev git locales firmware-realtek manpages-dev manpages iso-codes libicu67
 apt autoremove -y
 apt clean
 rm -rf $CONFIG_DIR
