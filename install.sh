@@ -9,9 +9,15 @@ apt remove userconf-pi triggerhappy -y
 mkdir -p /opt/pigo/games
 
 
-git clone https://github.com/daviel/pigo-config $CONFIG_DIR
-git clone https://github.com/daviel/uinput-pigo-mapper.git /opt/pigo/keymapper
-git clone https://github.com/daviel/pigogui.git /opt/pigo/pigogui
+if [ ! -d "$CONFIG_DIR" ] ; then
+    git clone "https://github.com/daviel/pigo-config" "$CONFIG_DIR"
+fi
+if [ ! -d "/opt/pigo/pigogui" ] ; then
+    git clone "https://github.com/daviel/pigogui.git" "/opt/pigo/pigogui"
+fi
+if [ ! -d "/opt/pigo/keymapper" ] ; then
+    git clone "https://github.com/daviel/uinput-pigo-mapper.git" "/opt/pigo/keymapper"
+fi
 
 
 cp $CONFIG_DIR/buster.list /etc/apt/sources.list.d/buster.list
@@ -23,6 +29,7 @@ cp $CONFIG_DIR/fbcp.service /etc/systemd/system/fbcp.service
 cp $CONFIG_DIR/lightdisplay.service /etc/systemd/system/lightdisplay.service
 cp $CONFIG_DIR/pigogui.service /etc/systemd/system/pigogui.service
 
+apt update
 apt install libraspberrypi-dev/oldstable libraspberrypi0/oldstable raspberrypi-bootloader/oldstable wiringpi/oldstable -y --allow-downgrades
 
 systemctl daemon-reload
