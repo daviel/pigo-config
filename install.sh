@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG_DIR="$CONFIG_DIR"
+CONFIG_DIR="/tmp/pigo-config"
 
 apt update
 apt install libevdev-dev git python3-pip libraspberrypi-dev/oldstable libraspberrypi0/oldstable raspberrypi-bootloader/oldstable wiringpi/oldstable -y --allow-downgrades
