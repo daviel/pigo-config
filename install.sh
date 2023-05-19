@@ -34,6 +34,8 @@ systemctl stop pigogui.service
 systemctl stop lightdisplay.service
 systemctl stop fbcp.service
 
+sleep 3
+
 wget https://github.com/daviel/SDL-pigo/releases/download/2.0.10-pigo/libSDL2-2.0.so.0.10.0 -O /usr/lib/libSDL2-2.0.so
 wget https://github.com/daviel/lv_binding_micropython/releases/download/v9.0.0-pigo/micropython -O /usr/bin/micropython
 wget https://github.com/daviel/fbcp-ili9341-pigo/releases/download/v1.0-pigo/fbcp-ili9341 -O /usr/bin/fbcp
