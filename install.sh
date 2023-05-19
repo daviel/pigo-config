@@ -3,7 +3,7 @@
 CONFIG_DIR="/tmp/pigo-config"
 
 apt update
-apt install libevdev-dev git python3-pip libraspberrypi-dev/oldstable libraspberrypi0/oldstable raspberrypi-bootloader/oldstable wiringpi/oldstable -y --allow-downgrades
+apt install libevdev-dev git python3-pip -y
 apt remove userconf-pi triggerhappy -y
 
 mkdir -p /opt/pigo/games
@@ -23,6 +23,7 @@ cp $CONFIG_DIR/fbcp.service /etc/systemd/system/fbcp.service
 cp $CONFIG_DIR/lightdisplay.service /etc/systemd/system/lightdisplay.service
 cp $CONFIG_DIR/pigogui.service /etc/systemd/system/pigogui.service
 
+apt install libraspberrypi-dev/oldstable libraspberrypi0/oldstable raspberrypi-bootloader/oldstable wiringpi/oldstable -y --allow-downgrades
 
 systemctl daemon-reload
 systemctl disable getty@tty1
