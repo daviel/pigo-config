@@ -22,8 +22,7 @@ fi
 CMDLINE=`cat /boot/cmdline.txt | tr -d '\n'`
 echo -n $CMDLINE > /boot/cmdline.txt
 
-declare -a arr=("loglevel=3" "vt.global_cursor_default=0" "logo.nologo" "quiet")
-for i in "${arr[@]}"
+for i in "loglevel=3" "vt.global_cursor_default=0" "logo.nologo" "quiet"
 do
    if grep -q "$i" /boot/cmdline.txt
     then
