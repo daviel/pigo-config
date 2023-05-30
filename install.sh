@@ -2,6 +2,7 @@
 
 CONFIG_DIR="/tmp/pigo-config"
 
+apt remove -y userconf-pi triggerhappy firmware-atheros firmware-libertas gcc-10 g++-10 cpp-10 gdb firmware-misc-nonfree manpages-dev git locales firmware-realtek manpages-dev manpages iso-codes libicu67
 apt update
 apt install -y libevdev-dev git python3-pip libcurl4-openssl-dev libopenal1 libmodplug1 libvorbisfile3 libtheora0 libmpg123-0
 
@@ -71,7 +72,6 @@ systemctl start pigogui.service
 systemctl start lightdisplay.service
 systemctl start fbcp.service
 
-apt remove -y userconf-pi triggerhappy firmware-atheros firmware-libertas gcc-10 g++-10 cpp-10 gdb firmware-misc-nonfree manpages-dev git locales firmware-realtek manpages-dev manpages iso-codes libicu67
 apt autoremove -y
 apt clean
 rm -rf $CONFIG_DIR
