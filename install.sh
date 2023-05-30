@@ -18,6 +18,22 @@ if [ ! -d "/opt/pigo/keymapper" ] ; then
     git clone "https://github.com/daviel/uinput-pigo-mapper.git" "/opt/pigo/keymapper"
 fi
 
+CMDLINE=`cat /boot/cmdline.txt | tr -d '\n'`
+echo -n $CMDLINE > /boot/cmdline.txt
+
+declare -a arr=("loglevel=3" "vt.global_cursor_default=0" "logo.nologo" "quiet")
+for i in "${arr[@]}"
+do
+   if grep -q "$i" /boot/cmdline.txt
+    then
+       echo "found $i"
+    else
+        echo "not found: $i"
+        echo -n " $i" >> /boot/cmdline.txt
+    fi
+done
+echo "" >> /boot/cmdline.txt
+
 
 cp $CONFIG_DIR/buster.list /etc/apt/sources.list.d/buster.list
 cp $CONFIG_DIR/cmdline.txt /boot/cmdline.txt
