@@ -2,7 +2,6 @@
 
 CONFIG_DIR="/tmp/pigo-config"
 
-apt remove -y userconf-pi triggerhappy firmware-atheros firmware-libertas gcc-10 g++-10 cpp-10 gdb firmware-misc-nonfree manpages-dev git locales firmware-realtek manpages-dev manpages iso-codes libicu67
 apt update
 apt install -y libevdev-dev git python3-pip libcurl4-openssl-dev libopenal1 libmodplug1 libvorbisfile3 libtheora0 libmpg123-0
 
@@ -44,8 +43,7 @@ cp $CONFIG_DIR/fbcp.service /etc/systemd/system/fbcp.service
 cp $CONFIG_DIR/lightdisplay.service /etc/systemd/system/lightdisplay.service
 cp $CONFIG_DIR/pigogui.service /etc/systemd/system/pigogui.service
 
-apt update
-apt install libraspberrypi-dev/oldstable libraspberrypi0/oldstable raspberrypi-bootloader/oldstable wiringpi/oldstable -y --allow-downgrades
+rm -rf $CONFIG_DIR
 
 systemctl daemon-reload
 systemctl disable getty@tty1
@@ -71,6 +69,9 @@ systemctl start pigogui.service
 systemctl start lightdisplay.service
 systemctl start fbcp.service
 
+apt update
+apt install libraspberrypi-dev/oldstable libraspberrypi0/oldstable raspberrypi-bootloader/oldstable wiringpi/oldstable -y --allow-downgrades
+
+apt remove -y userconf-pi triggerhappy firmware-atheros firmware-libertas gcc-10 g++-10 cpp-10 gdb firmware-misc-nonfree manpages-dev git locales firmware-realtek manpages-dev manpages iso-codes libicu67
 apt autoremove -y
-apt clean
-rm -rf $CONFIG_DIR
+apt clean all
