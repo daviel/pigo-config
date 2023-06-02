@@ -3,6 +3,7 @@
 CONFIG_DIR="/tmp/pigo-config"
 
 apt update
+apt dist-upgrade -y
 apt install -y libevdev-dev git python3-pip libcurl4-openssl-dev libopenal1 libmodplug1 libvorbisfile3 libtheora0 libmpg123-0
 
 mkdir -p /opt/pigo/games
