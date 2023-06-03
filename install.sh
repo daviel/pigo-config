@@ -6,6 +6,8 @@ apt update
 apt dist-upgrade -y
 apt install -y libevdev-dev git python3-pip libcurl4-openssl-dev libopenal1 libmodplug1 libvorbisfile3 libtheora0 libmpg123-0
 
+pip3 install libevdev
+
 mkdir -p /opt/pigo/games
 
 
@@ -77,6 +79,6 @@ systemctl start fbcp.service
 apt update
 apt install libraspberrypi-dev/oldstable libraspberrypi0/oldstable raspberrypi-bootloader/oldstable wiringpi/oldstable -y --allow-downgrades
 
-apt remove -y userconf-pi triggerhappy firmware-atheros firmware-libertas gcc-10 g++-10 cpp-10 gdb firmware-misc-nonfree manpages-dev git locales firmware-realtek manpages-dev manpages iso-codes libicu67
+apt remove -y userconf-pi triggerhappy firmware-atheros firmware-libertas gcc-10 g++-10 cpp-10 gdb firmware-misc-nonfree manpages-dev git firmware-realtek manpages-dev manpages iso-codes libicu67
 apt autoremove -y
 apt clean all
