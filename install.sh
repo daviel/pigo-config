@@ -38,7 +38,6 @@ echo "" >> /boot/cmdline.txt
 
 
 cp $CONFIG_DIR/buster.list /etc/apt/sources.list.d/buster.list
-cp $CONFIG_DIR/cmdline.txt /boot/cmdline.txt
 cp $CONFIG_DIR/config.txt /boot/config.txt
 cp $CONFIG_DIR/asound.conf /etc/asound.conf
 cp $CONFIG_DIR/wait.conf /etc/systemd/system/dhcpcd.service.d/wait.conf
