@@ -48,6 +48,8 @@ rm -rf $CONFIG_DIR
 
 systemctl daemon-reload
 systemctl disable getty@tty1
+systemctl disable userconfig.service 
+
 systemctl enable pigogui.service
 systemctl enable lightdisplay.service
 systemctl enable fbcp.service
@@ -55,6 +57,8 @@ systemctl enable fbcp.service
 systemctl stop pigogui.service
 systemctl stop lightdisplay.service
 systemctl stop fbcp.service
+systemctl stop userconfig.service 
+
 
 sleep 3
 
