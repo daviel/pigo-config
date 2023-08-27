@@ -48,9 +48,9 @@ cp $CONFIG_DIR/pigogui.service /etc/systemd/system/pigogui.service
 rm -rf $CONFIG_DIR
 
 systemctl daemon-reload
-systemctl disable getty@tty1
+systemctl disable getty@tty1.service
 systemctl disable userconfig.service
-systemctl disable hciuart
+systemctl disable hciuart.service
 
 systemctl enable pigogui.service
 systemctl enable lightdisplay.service
