@@ -49,7 +49,8 @@ rm -rf $CONFIG_DIR
 
 systemctl daemon-reload
 systemctl disable getty@tty1
-systemctl disable userconfig.service 
+systemctl disable userconfig.service
+systemctl disable hciuart
 
 systemctl enable pigogui.service
 systemctl enable lightdisplay.service
