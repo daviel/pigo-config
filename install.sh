@@ -6,6 +6,8 @@ apt update
 apt dist-upgrade -y
 apt install -y libevdev-dev git python3-pip libcurl4-openssl-dev libopenal1 libmodplug1 libvorbisfile3 libtheora0 libmpg123-0
 
+apt install -y libsdl2-net-2.0-0
+
 pip3 install libevdev
 
 mkdir -p /opt/pigo/games
@@ -51,6 +53,7 @@ systemctl daemon-reload
 systemctl disable getty@tty1.service
 systemctl disable userconfig.service
 systemctl disable hciuart.service
+systemctl disable keyboard-setup.service
 
 systemctl enable pigogui.service
 systemctl enable lightdisplay.service
@@ -68,6 +71,8 @@ wget https://github.com/daviel/SDL-pigo/releases/download/2.0.10-pigo/libSDL2-2.
 wget https://github.com/daviel/lvgl/releases/download/v9.0.0-alpha/micropython.13 -O /usr/bin/micropython
 wget https://github.com/daviel/fbcp-ili9341-pigo/releases/download/v1.0-pigo/fbcp-ili9341 -O /usr/bin/fbcp
 
+cp /usr/lib/libSDL2-2.0.so /lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.14.0
+
 ldconfig
 chmod +x /usr/bin/micropython
 chmod +x /usr/bin/fbcp
@@ -79,6 +84,43 @@ systemctl start fbcp.service
 apt update
 apt install libraspberrypi-dev/oldstable libraspberrypi0/oldstable raspberrypi-bootloader/oldstable wiringpi/oldstable -y --allow-downgrades
 
-apt remove -y userconf-pi triggerhappy firmware-atheros firmware-libertas gcc-10 g++-10 cpp-10 gdb firmware-misc-nonfree manpages-dev git firmware-realtek manpages-dev manpages iso-codes libicu67
+apt remove -y userconf-pi triggerhappy firmware-atheros firmware-libertas gcc-10 g++-10 cpp-10 gdb firmware-misc-nonfree manpages-dev git firmware-realtek manpages-dev manpages iso-codes libicu67 nfs-common
 apt autoremove -y
 apt clean all
+
+
+# disable preconfigured swap
+dphys-swapfile uninstall
+
+# set swappiness
+SYSCTL=`cat /etc/sysctl.conf | tr -d '\n'`
+echo -n $SYSCTL > /etc/sysctl.conf
+
+for i in "vm.swappiness=10"
+do
+   if grep -q "$i" /etc/sysctl.conf
+    then
+       echo "found $i"
+    else
+        echo "not found: $i"
+        echo -n " $i" >> /etc/sysctl.conf
+    fi
+done
+echo "" >> /etc/sysctl.conf
+
+DPHYS_SWAPFILE=`cat /etc/dphys-swapfile | tr -d '\n'`
+echo -n $DPHYS_SWAPFILE > /etc/dphys-swapfile
+
+for i in "CONF_SWAPSIZE=512"
+do
+   if grep -q "$i" /etc/dphys-swapfile
+    then
+       echo "found $i"
+    else
+        echo "not found: $i"
+        echo -n " $i" >> /etc/dphys-swapfile
+    fi
+done
+echo "" >> /etc/dphys-swapfile
+
+dphys-swapfile setup
