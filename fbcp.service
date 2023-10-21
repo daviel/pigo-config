@@ -7,4 +7,5 @@ Type=simple
 Restart=always
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=sysinit.target
+TimeoutStopSec=1

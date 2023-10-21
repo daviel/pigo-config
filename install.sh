@@ -89,9 +89,6 @@ apt autoremove -y
 apt clean all
 
 
-# disable preconfigured swap
-dphys-swapfile uninstall
-
 # set swappiness
 SYSCTL=`cat /etc/sysctl.conf | tr -d '\n'`
 echo -n $SYSCTL > /etc/sysctl.conf
@@ -102,7 +99,7 @@ do
     then
        echo "found $i"
     else
-        echo "not found: $i"
+        echo "not found $i adding it to /etc/sysctl.conf"
         echo -n " $i" >> /etc/sysctl.conf
     fi
 done
@@ -117,10 +114,8 @@ do
     then
        echo "found $i"
     else
-        echo "not found: $i"
+        echo "not found $i adding it to /etc/dphys-swapfile"
         echo -n " $i" >> /etc/dphys-swapfile
     fi
 done
 echo "" >> /etc/dphys-swapfile
-
-dphys-swapfile setup
