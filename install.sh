@@ -82,7 +82,7 @@ systemctl start lightdisplay.service
 systemctl start fbcp.service
 
 apt update
-apt install libraspberrypi-dev/oldstable libraspberrypi0/oldstable raspberrypi-bootloader/oldstable wiringpi/oldstable -y --allow-downgrades
+apt install libraspberrypi-dev/buster libraspberrypi0/buster raspberrypi-bootloader/buster wiringpi/buster wiringpi -y --allow-downgrades
 
 apt remove -y userconf-pi triggerhappy firmware-atheros firmware-libertas gcc-10 g++-10 cpp-10 gdb firmware-misc-nonfree manpages-dev git firmware-realtek manpages-dev manpages iso-codes libicu67 nfs-common
 apt autoremove -y
