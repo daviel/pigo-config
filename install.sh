@@ -21,24 +21,24 @@ if [ ! -d "/opt/pigo/keymapper" ] ; then
     git clone "https://github.com/daviel/uinput-pigo-mapper.git" "/opt/pigo/keymapper"
 fi
 
-CMDLINE=`cat /boot/cmdline.txt | tr -d '\n'`
-echo -n $CMDLINE > /boot/cmdline.txt
+CMDLINE=`cat /boot/firmware/cmdline.txt | tr -d '\n'`
+echo -n $CMDLINE > /boot/firmware/cmdline.txt
 
 for i in "loglevel=3" "vt.global_cursor_default=0" "logo.nologo" "quiet"
 do
-   if grep -q "$i" /boot/cmdline.txt
+   if grep -q "$i" /boot/firmware/cmdline.txt
     then
        echo "found $i"
     else
         echo "not found: $i"
-        echo -n " $i" >> /boot/cmdline.txt
+        echo -n " $i" >> /boot/firmware/cmdline.txt
     fi
 done
-echo "" >> /boot/cmdline.txt
+echo "" >> /boot/firmware/cmdline.txt
 
 
 cp $CONFIG_DIR/buster.list /etc/apt/sources.list.d/buster.list
-cp $CONFIG_DIR/config.txt /boot/config.txt
+cp $CONFIG_DIR/config.txt /boot/firmware/config.txt
 cp $CONFIG_DIR/asound.conf /etc/asound.conf
 cp $CONFIG_DIR/wait.conf /etc/systemd/system/dhcpcd.service.d/wait.conf
 cp $CONFIG_DIR/fbcp.service /etc/systemd/system/fbcp.service
