@@ -80,7 +80,7 @@ systemctl start fbcp.service
 apt update
 apt install libraspberrypi-dev/buster libraspberrypi0/buster raspberrypi-bootloader/buster wiringpi -y --allow-downgrades
 
-apt remove -y userconf-pi triggerhappy firmware-atheros firmware-libertas gcc-10 g++-10 cpp-10 gdb firmware-misc-nonfree manpages-dev git firmware-realtek manpages-dev manpages iso-codes libicu67 nfs-common
+apt remove -y userconf-pi triggerhappy firmware-atheros firmware-libertas gcc-12 g++-12 cpp-12 gdb firmware-misc-nonfree manpages-dev git firmware-realtek manpages-dev manpages iso-codes libicu* nfs-common
 apt autoremove -y
 apt clean all
 
