@@ -50,6 +50,8 @@ systemctl disable getty@tty1.service
 systemctl disable userconfig.service
 systemctl disable hciuart.service
 systemctl disable keyboard-setup.service
+systemctl disable console-setup.service
+systemctl disable bluetooth.service
 
 systemctl enable pigogui.service
 systemctl enable lightdisplay.service
@@ -80,7 +82,7 @@ systemctl start fbcp.service
 apt update
 apt install libraspberrypi-dev/buster libraspberrypi0/buster raspberrypi-bootloader/buster wiringpi -y --allow-downgrades
 
-apt remove -y userconf-pi triggerhappy firmware-atheros firmware-libertas gcc-12 g++-12 cpp-12 gdb firmware-misc-nonfree manpages-dev git firmware-realtek manpages-dev manpages iso-codes libicu* nfs-common
+apt remove -y triggerhappy firmware-atheros firmware-libertas gcc-12 g++-12 cpp-12 gdb firmware-misc-nonfree manpages-dev git firmware-realtek manpages-dev manpages iso-codes libicu* nfs-common
 apt autoremove -y
 apt clean all
 
