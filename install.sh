@@ -22,7 +22,7 @@ fi
 CMDLINE=`cat /boot/firmware/cmdline.txt | tr -d '\n'`
 echo -n $CMDLINE > /boot/firmware/cmdline.txt
 
-for i in "loglevel=3" "vt.global_cursor_default=0" "logo.nologo" "quiet"
+for i in "loglevel=0" "vt.global_cursor_default=0" "logo.nologo" "quiet" "splash" "console=tty3"
 do
    if grep -q "$i" /boot/firmware/cmdline.txt
     then
