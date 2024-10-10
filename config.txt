@@ -3,7 +3,7 @@
 # Some settings may impact device functionality. See link above for details
 
 # Uncomment some or all of these to enable the optional hardware interfaces
-#dtparam=i2c_arm=on
+dtparam=i2c_arm=on
 #dtparam=i2s=on
 #dtparam=spi=on
 
@@ -54,7 +54,6 @@ gpu_mem=128
 
 dtoverlay=hifiberry-dac
 dtoverlay=i2s-mmap
-dtparam=i2c_arm=on
 
 disable_splash=1
 boot_delay=0
