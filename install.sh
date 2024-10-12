@@ -19,6 +19,7 @@ if [ ! -d "/opt/pigo/keymapper" ] ; then
     git clone "https://github.com/daviel/uinput-pigo-mapper.git" "/opt/pigo/keymapper"
 fi
 
+sed -i 's/console=tty1/console=tty3/g' /boot/firmware/cmdline.txt
 CMDLINE=`cat /boot/firmware/cmdline.txt | tr -d '\n'`
 echo -n $CMDLINE > /boot/firmware/cmdline.txt
 
@@ -82,7 +83,7 @@ systemctl start fbcp.service
 apt update
 apt install libraspberrypi-dev/buster libraspberrypi0/buster raspberrypi-bootloader/buster wiringpi -y --allow-downgrades
 
-apt remove -y triggerhappy firmware-atheros firmware-libertas gcc-12 g++-12 cpp-12 gdb firmware-misc-nonfree manpages-dev git firmware-realtek manpages-dev manpages iso-codes libicu* nfs-common
+apt remove -y triggerhappy firmware-atheros firmware-libertas gcc-12 g++-12 cpp-12 gdb firmware-misc-nonfree manpages-dev firmware-realtek manpages-dev manpages iso-codes libicu* nfs-common
 apt autoremove -y
 apt clean all
 
