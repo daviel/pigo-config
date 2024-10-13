@@ -66,11 +66,11 @@ systemctl stop userconfig.service
 
 sleep 3
 
-wget https://github.com/daviel/SDL-pigo/releases/download/release-2.0.22/libSDL2-2.0.so.0.22.0 -O /usr/lib/libSDL2-2.0.so
+wget https://github.com/daviel/SDL-pigo/releases/download/2.0.10-pigo/libSDL2-2.0.so.0.10.0 -O /usr/lib/libSDL2-2.0.so
 wget https://github.com/daviel/lvgl/releases/download/v9.2.0/micropython -O /usr/bin/micropython
 wget https://github.com/daviel/fbcp-ili9341-pigo/releases/download/v1.0-pigo/fbcp-ili9341 -O /usr/bin/fbcp
 
-cp /usr/lib/libSDL2-2.0.so /lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.22.0
+cp /usr/lib/libSDL2-2.0.so /lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0
 
 ldconfig
 chmod +x /usr/bin/micropython
