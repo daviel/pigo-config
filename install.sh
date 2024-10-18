@@ -51,7 +51,6 @@ echo "" >> /boot/firmware/cmdline.txt
 cp $CONFIG_DIR/buster.list /etc/apt/sources.list.d/buster.list
 cp $CONFIG_DIR/config.txt /boot/firmware/config.txt
 cp $CONFIG_DIR/asound.conf /etc/asound.conf
-cp $CONFIG_DIR/wait.conf /etc/systemd/system/dhcpcd.service.d/wait.conf
 cp $CONFIG_DIR/fbcp.service /etc/systemd/system/fbcp.service
 cp $CONFIG_DIR/lightdisplay.service /etc/systemd/system/lightdisplay.service
 cp $CONFIG_DIR/pigogui.service /etc/systemd/system/pigogui.service
