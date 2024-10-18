@@ -2,7 +2,7 @@
 
 sudo su -
 
-CONFIG_DIR="/opt/pigo-config"
+CONFIG_DIR="/opt/pigo/pigo-config"
 PIGOGUI_DIR="/opt/pigo/pigogui"
 KEYMAPPER_DIR="/opt/pigo/keymapper"
 
