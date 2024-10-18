@@ -13,15 +13,6 @@ apt install -y libevdev-dev git python3-pip libcurl4-openssl-dev libopenal1 libm
 mkdir -p /opt/pigo/games
 
 
-if [ ! -d "$CONFIG_DIR" ] ; then
-    git clone "https://github.com/daviel/pigo-config" "$CONFIG_DIR"
-else
-    # Update pigo-config
-    cd "$CONFIG_DIR"
-    git reset --hard
-    git pull
-fi
-
 if [ ! -d "/opt/pigo/pigogui" ] ; then
     git clone "https://github.com/daviel/pigogui.git" "$PIGOGUI_DIR"
 else
