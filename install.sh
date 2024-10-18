@@ -1,6 +1,10 @@
 #!/bin/bash
 
-CONFIG_DIR="/tmp/pigo-config"
+sudo su -
+
+CONFIG_DIR="/opt/pigo-config"
+PIGOGUI_DIR="/opt/pigo/pigogui"
+KEYMAPPER_DIR="/opt/pigo/keymapper"
 
 apt update
 apt dist-upgrade -y
@@ -11,12 +15,29 @@ mkdir -p /opt/pigo/games
 
 if [ ! -d "$CONFIG_DIR" ] ; then
     git clone "https://github.com/daviel/pigo-config" "$CONFIG_DIR"
+else
+    # Update pigo-config
+    cd "$CONFIG_DIR"
+    git reset --hard
+    git pull
 fi
+
 if [ ! -d "/opt/pigo/pigogui" ] ; then
-    git clone "https://github.com/daviel/pigogui.git" "/opt/pigo/pigogui"
+    git clone "https://github.com/daviel/pigogui.git" "$PIGOGUI_DIR"
+else
+    # update pigogui
+    cd "$PIGOGUI_DIR"
+    git reset --hard
+    git pull
 fi
+
 if [ ! -d "/opt/pigo/keymapper" ] ; then
-    git clone "https://github.com/daviel/uinput-pigo-mapper.git" "/opt/pigo/keymapper"
+    git clone "https://github.com/daviel/uinput-pigo-mapper.git" "$KEYMAPPER_DIR"
+else
+    # update keymapper
+    cd "$KEYMAPPER_DIR"
+    git reset --hard
+    git pull
 fi
 
 sed -i 's/console=tty1/console=tty3/g' /boot/firmware/cmdline.txt
@@ -44,8 +65,6 @@ cp $CONFIG_DIR/fbcp.service /etc/systemd/system/fbcp.service
 cp $CONFIG_DIR/lightdisplay.service /etc/systemd/system/lightdisplay.service
 cp $CONFIG_DIR/pigogui.service /etc/systemd/system/pigogui.service
 
-rm -rf $CONFIG_DIR
-
 systemctl daemon-reload
 systemctl disable getty@tty1.service
 systemctl disable userconfig.service
@@ -64,21 +83,27 @@ systemctl stop fbcp.service
 systemctl stop userconfig.service 
 
 
-sleep 3
+rm -f /usr/lib/libSDL2*
+rm -f /lib/arm-linux-gnueabihf/libSDL2*
 
 wget https://github.com/daviel/SDL-pigo/releases/download/2.0.10-pigo/libSDL2-2.0.so.0.10.0 -O /usr/lib/libSDL2-2.0.so
+cp /usr/lib/libSDL2-2.0.so /lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0
+
+rm -f /usr/bin/micropython
+rm -f /usr/bin/fbcp
+
 wget https://github.com/daviel/lvgl/releases/download/v9.2.0/micropython -O /usr/bin/micropython
 wget https://github.com/daviel/fbcp-ili9341-pigo/releases/download/v1.0-pigo/fbcp-ili9341 -O /usr/bin/fbcp
 
-cp /usr/lib/libSDL2-2.0.so /lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0
+
 
 ldconfig
 chmod +x /usr/bin/micropython
 chmod +x /usr/bin/fbcp
 
-systemctl start pigogui.service
-systemctl start lightdisplay.service
-systemctl start fbcp.service
+systemctl restart pigogui.service
+systemctl restart lightdisplay.service
+systemctl restart fbcp.service
 
 apt update
 apt install libraspberrypi-dev/buster libraspberrypi0/buster raspberrypi-bootloader/buster wiringpi -y --allow-downgrades
