@@ -4,6 +4,11 @@ CONFIG_DIR="/opt/pigo/pigo-config"
 
 sudo su -
 
+apt update
+apt dist-upgrade -y
+apt install -y git
+
+
 
 if [ ! -d "$CONFIG_DIR" ] ; then
     git clone "https://github.com/daviel/pigo-config" "$CONFIG_DIR"
