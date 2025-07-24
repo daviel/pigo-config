@@ -49,6 +49,7 @@ echo "" >> /boot/firmware/cmdline.txt
 
 
 cp $CONFIG_DIR/buster.list /etc/apt/sources.list.d/buster.list
+cp $CONFIG_DIR/bullseye.list /etc/apt/sources.list.d/bullseye.list
 cp $CONFIG_DIR/config.txt /boot/firmware/config.txt
 cp $CONFIG_DIR/asound.conf /etc/asound.conf
 cp $CONFIG_DIR/fbcp.service /etc/systemd/system/fbcp.service
