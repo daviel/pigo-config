@@ -83,7 +83,7 @@ cp /usr/lib/libSDL2-2.0.so /lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0
 rm -f /usr/bin/micropython
 rm -f /usr/bin/fbcp
 
-wget https://github.com/daviel/lvgl/releases/download/v9.2.0/micropython -O /usr/bin/micropython
+wget https://github.com/daviel/lvgl/releases/download/v9.3.0/micropython -O /usr/bin/micropython
 wget https://github.com/daviel/fbcp-ili9341-pigo/releases/download/v1.0-pigo/fbcp-ili9341 -O /usr/bin/fbcp
 
 
