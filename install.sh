@@ -119,18 +119,3 @@ do
     fi
 done
 echo "" >> /etc/sysctl.conf
-
-DPHYS_SWAPFILE=`cat /etc/dphys-swapfile | tr -d '\n'`
-echo -n $DPHYS_SWAPFILE > /etc/dphys-swapfile
-
-for i in "CONF_SWAPSIZE=512"
-do
-   if grep -q "$i" /etc/dphys-swapfile
-    then
-       echo "found $i"
-    else
-        echo "not found $i adding it to /etc/dphys-swapfile"
-        echo -n " $i" >> /etc/dphys-swapfile
-    fi
-done
-echo "" >> /etc/dphys-swapfile
