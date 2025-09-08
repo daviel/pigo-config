@@ -119,3 +119,7 @@ do
     fi
 done
 echo "" >> /etc/sysctl.conf
+
+# for SSH access
+dpkg-reconfigure openssh-server
+ssh-keygen -A
