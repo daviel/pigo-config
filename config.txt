@@ -5,7 +5,7 @@
 # Uncomment some or all of these to enable the optional hardware interfaces
 dtparam=i2c_arm=on
 #dtparam=i2s=on
-#dtparam=spi=on
+dtparam=spi=on
 
 # Enable audio (loads snd_bcm2835)
 #dtparam=audio=on
@@ -23,7 +23,7 @@ display_auto_detect=1
 auto_initramfs=1
 
 # Enable DRM VC4 V3D driver
-#dtoverlay=vc4-kms-v3d
+dtoverlay=vc4-kms-v3d
 #max_framebuffers=2
 
 # Don't have the firmware create an initial video= setting in cmdline.txt.
@@ -46,11 +46,8 @@ otg_mode=1
 dtoverlay=dwc2,dr_mode=host
 
 [all]
-hdmi_group=2
-hdmi_mode=87
-hdmi_cvt=320 240 60 1 0 0 0
-hdmi_force_hotplug=1
-gpu_mem=128
+gpu_mem=32
+dtoverlay=ili9341-modern
 
 dtoverlay=hifiberry-dac
 dtoverlay=i2s-mmap
