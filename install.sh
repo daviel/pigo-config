@@ -47,6 +47,8 @@ do
 done
 echo "" >> /boot/firmware/cmdline.txt
 
+cp $CONFIG_DIR/ili9341-modern.dts /boot/firmware/overlays/ili9341-modern.dts
+dtc -@ -I dts -O dtb -o /boot/firmware/overlays/ili9341-modern.dtbo /boot/firmware/overlays/ili9341-modern.dts
 
 cp $CONFIG_DIR/config.txt /boot/firmware/config.txt
 cp $CONFIG_DIR/asound.conf /etc/asound.conf
