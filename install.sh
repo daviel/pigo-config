@@ -82,8 +82,8 @@ systemctl restart pigogui.service
 systemctl restart lightdisplay.service
 
 # wiring pi
-wget https://github.com/WiringPi/WiringPi/releases/download/3.18/wiringpi_3.18_armhf.deb
-dpkg -i wiringpi_3.18_armhf.deb
+wget https://github.com/WiringPi/WiringPi/releases/download/3.18/wiringpi_3.18_arm64.deb
+dpkg -i wiringpi_3.18_arm64.deb
 
 # cleanup
 apt remove -y triggerhappy firmware-atheros firmware-libertas gcc-12 g++-12 cpp-12 gdb firmware-misc-nonfree manpages-dev firmware-realtek manpages-dev manpages iso-codes nfs-common
