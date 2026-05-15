@@ -8,10 +8,13 @@ KEYMAPPER_DIR="/opt/pigo/keymapper"
 
 apt update
 apt dist-upgrade -y
-apt install -y libevdev-dev git python3-pip libcurl4-openssl-dev libopenal1 libmodplug1 libvorbisfile3 libtheora0 libmpg123-0 python3-libevdev wget
+apt install -y libevdev-dev git python3-pip libcurl4-openssl-dev libopenal1 libmodplug1 libvorbisfile3 libtheora0 libmpg123-0 python3-libevdev wget sway seatd
 
 mkdir -p /opt/pigo/games
+mkdir -p /home/pigo/.config/sway
 
+usermod -aG video,input,audio,tty pigo
+loginctl enable-linger pigo
 
 if [ ! -d "/opt/pigo/pigogui" ] ; then
     git clone "https://github.com/daviel/pigogui.git" "$PIGOGUI_DIR"
@@ -50,16 +53,21 @@ echo "" >> /boot/firmware/cmdline.txt
 cp $CONFIG_DIR/ili9341-modern.dts /boot/firmware/overlays/ili9341-modern.dts
 dtc -@ -I dts -O dtb -o /boot/firmware/overlays/ili9341-modern.dtbo /boot/firmware/overlays/ili9341-modern.dts
 
+cp $CONFIG_DIR/sway.service /home/pigo/.config/systemd/user/sway.service
+cp $CONFIG_DIR/sway.config /home/pigo/.config/sway/config
 cp $CONFIG_DIR/config.txt /boot/firmware/config.txt
 cp $CONFIG_DIR/asound.conf /etc/asound.conf
 cp $CONFIG_DIR/lightdisplay.service /etc/systemd/system/lightdisplay.service
 cp $CONFIG_DIR/pigogui.service /etc/systemd/system/pigogui.service
 
 systemctl daemon-reload
+systemctl --user daemon-reload
+
 systemctl disable getty@tty1.service
 systemctl disable userconfig.service
 systemctl disable keyboard-setup.service
 systemctl disable console-setup.service
+systemctl --user enable sway
 
 systemctl enable pigogui.service
 systemctl enable lightdisplay.service
@@ -78,7 +86,7 @@ wget https://github.com/WiringPi/WiringPi/releases/download/3.18/wiringpi_3.18_a
 dpkg -i wiringpi_3.18_armhf.deb
 
 # cleanup
-apt remove -y triggerhappy firmware-atheros firmware-libertas gcc-12 g++-12 cpp-12 gdb firmware-misc-nonfree manpages-dev firmware-realtek manpages-dev manpages iso-codes libicu* nfs-common
+apt remove -y triggerhappy firmware-atheros firmware-libertas gcc-12 g++-12 cpp-12 gdb firmware-misc-nonfree manpages-dev firmware-realtek manpages-dev manpages iso-codes nfs-common
 apt autoremove -y
 apt clean all
 
