@@ -15,12 +15,13 @@ KEYMAPPER_DIR="/opt/pigo/keymapper"
 apt-get update
 apt-get dist-upgrade -y
 apt-get install -y \
-    libevdev-dev git python3-pip libcurl4-openssl-dev \
+    libevdev-dev git python3-pip libcurl4 \
     libopenal1 libmodplug1 libvorbisfile3 libtheora0 \
     python3-libevdev wget sway seatd openssh-server \
     device-tree-compiler \
     libsdl2-2.0-0 \
-    mpg123
+    mpg123 \
+    pipewire-pulse
 apt-get --fix-broken install -y
 
 # ── Verzeichnisse ─────────────────────────────────────────────────────────────
