@@ -188,8 +188,8 @@ find /usr/share/locale -mindepth 1 -maxdepth 1 \
 find /usr -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 
 # systemd-Journal auf 20 MB begrenzen
-mkdir -p /etc/systemd/journald.conf.d
-printf '[Journal]\nSystemMaxUse=20M\nRuntimeMaxUse=10M\n' \
+mkdir -p /etc/systemd/journald.conf.d /var/log/journal
+printf '[Journal]\nStorage=persistent\nSystemMaxUse=20M\nRuntimeMaxUse=10M\nCompress=yes\n' \
     > /etc/systemd/journald.conf.d/size.conf
 
 # ── Sysctl ────────────────────────────────────────────────────────────────────

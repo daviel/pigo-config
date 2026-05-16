@@ -9,6 +9,8 @@ RestartSec=1
 Environment=XDG_RUNTIME_DIR=/run/user/%U
 Environment=LIBSEAT_BACKEND=seatd
 Environment=WLR_BACKENDS=drm
+Environment=WLR_DRM_NO_ATOMIC=1
+Environment=SWAY_DEBUG=1
 
 [Install]
 WantedBy=default.target
