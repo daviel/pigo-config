@@ -1,12 +1,14 @@
 [Unit]
 Description=Sway Wayland Compositor
-After=graphical-session.target
+After=seatd.service
 
 [Service]
 ExecStart=/usr/bin/sway
 Restart=always
 RestartSec=1
 Environment=XDG_RUNTIME_DIR=/run/user/%U
+Environment=LIBSEAT_BACKEND=seatd
+Environment=WLR_BACKENDS=drm
 
 [Install]
 WantedBy=default.target

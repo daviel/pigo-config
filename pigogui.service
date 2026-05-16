@@ -4,6 +4,7 @@ After=sway.service
 PartOf=sway.service
 
 [Service]
+ExecStartPre=/bin/sh -c 'until [ -S "$XDG_RUNTIME_DIR/wayland-1" ]; do sleep 0.2; done'
 ExecStart=/opt/pigo/pigogui/start.sh
 Type=simple
 Restart=on-failure

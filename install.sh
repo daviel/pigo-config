@@ -18,7 +18,9 @@ apt-get install -y \
     libevdev-dev git python3-pip libcurl4-openssl-dev \
     libopenal1 libmodplug1 libvorbisfile3 libtheora0 \
     python3-libevdev wget sway seatd openssh-server \
-    device-tree-compiler
+    device-tree-compiler \
+    libsdl2-2.0-0 \
+    mpg123
 apt-get --fix-broken install -y
 
 # ── Verzeichnisse ─────────────────────────────────────────────────────────────
@@ -30,7 +32,10 @@ mkdir -p /home/pigo/.config/systemd/user/sway.service.wants
 
 # ── Benutzer ──────────────────────────────────────────────────────────────────
 
-usermod -aG video,input,audio,tty pigo
+usermod -aG video,input,audio,tty,seat pigo
+
+# seatd aktivieren: ermöglicht Sway KMS/DRM-Zugriff ohne getty-VT-Session
+systemctl enable seatd.service
 
 # loginctl enable-linger benötigt einen laufenden systemd-Bus.
 # Direkt die Linger-Datei anlegen – identisches Ergebnis.
