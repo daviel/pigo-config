@@ -5,7 +5,6 @@ CONFIG_DIR="/opt/pigo/pigo-config"
 sudo su -
 
 apt update
-apt dist-upgrade -y
 apt install -y git
 
 
