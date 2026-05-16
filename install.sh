@@ -8,7 +8,7 @@ KEYMAPPER_DIR="/opt/pigo/keymapper"
 
 apt update
 apt dist-upgrade -y
-apt install -y libevdev-dev git python3-pip libcurl4-openssl-dev libopenal1 libmodplug1 libvorbisfile3 libtheora0 libmpg123-0 python3-libevdev wget sway seatd
+apt install -y libevdev-dev git python3-pip libcurl4-openssl-dev libopenal1 libmodplug1 libvorbisfile3 libtheora0 python3-libevdev wget sway seatd
 apt --fix-broken install -y
 
 mkdir -p /opt/pigo/games
