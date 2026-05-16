@@ -1,10 +1,14 @@
 [Unit]
 Description=pigogui
+After=sway.service
+PartOf=sway.service
 
 [Service]
 ExecStart=/opt/pigo/pigogui/start.sh
 Type=simple
-Restart=always
+Restart=on-failure
+RestartSec=2
+Environment=WAYLAND_DISPLAY=wayland-1
 
 [Install]
-WantedBy=sysinit.target
+WantedBy=sway.service

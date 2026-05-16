@@ -26,6 +26,7 @@ apt-get --fix-broken install -y
 mkdir -p /opt/pigo/games
 mkdir -p /home/pigo/.config/sway
 mkdir -p /home/pigo/.config/systemd/user/default.target.wants
+mkdir -p /home/pigo/.config/systemd/user/sway.service.wants
 
 # ── Benutzer ──────────────────────────────────────────────────────────────────
 
@@ -79,10 +80,14 @@ dtc -@ -I dts -O dtb \
 cp "$CONFIG_DIR/config.txt"          /boot/firmware/config.txt
 cp "$CONFIG_DIR/asound.conf"         /etc/asound.conf
 
+# uinput: Modul beim Boot laden + Gruppe input Zugriff gewähren (für Keymapper)
+echo "uinput" > /etc/modules-load.d/uinput.conf
+cp "$CONFIG_DIR/99-uinput.rules"     /etc/udev/rules.d/99-uinput.rules
+
 # ── Systemd-Units ─────────────────────────────────────────────────────────────
 
 cp "$CONFIG_DIR/lightdisplay.service" /etc/systemd/system/lightdisplay.service
-cp "$CONFIG_DIR/pigogui.service"      /etc/systemd/system/pigogui.service
+cp "$CONFIG_DIR/pigogui.service"      /home/pigo/.config/systemd/user/pigogui.service
 cp "$CONFIG_DIR/sway.service"         /home/pigo/.config/systemd/user/sway.service
 cp "$CONFIG_DIR/sway.config"          /home/pigo/.config/sway/config
 
@@ -97,11 +102,12 @@ systemctl disable userconfig.service     2>/dev/null || true
 systemctl disable keyboard-setup.service 2>/dev/null || true
 systemctl disable console-setup.service  2>/dev/null || true
 
-# systemctl --user benötigt einen User-Session-Bus – Symlink direkt setzen
+# systemctl --user benötigt einen User-Session-Bus – Symlinks direkt setzen
 ln -sf /home/pigo/.config/systemd/user/sway.service \
        /home/pigo/.config/systemd/user/default.target.wants/sway.service
+ln -sf /home/pigo/.config/systemd/user/pigogui.service \
+       /home/pigo/.config/systemd/user/sway.service.wants/pigogui.service
 
-systemctl enable pigogui.service
 systemctl enable lightdisplay.service
 
 # ── Binaries ──────────────────────────────────────────────────────────────────
@@ -120,7 +126,6 @@ dpkg -i /tmp/wiringpi.deb
 rm /tmp/wiringpi.deb
 
 # Services starten (nur bei laufendem systemd; im pi-gen-chroot kein Daemon)
-systemctl restart pigogui.service     2>/dev/null || true
 systemctl restart lightdisplay.service 2>/dev/null || true
 
 # ── Aufräumen: Pakete ─────────────────────────────────────────────────────────
