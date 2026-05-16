@@ -12,7 +12,7 @@ apt install -y libevdev-dev git python3-pip libcurl4-openssl-dev libopenal1 libm
 
 mkdir -p /opt/pigo/games
 mkdir -p /home/pigo/.config/sway
-mkdir -P /home/pigo/.config/systemd/user/
+mkdir -p /home/pigo/.config/systemd/user/
 
 usermod -aG video,input,audio,tty pigo
 loginctl enable-linger pigo
