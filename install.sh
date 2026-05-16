@@ -120,7 +120,7 @@ systemctl enable lightdisplay.service
 
 # micropython (LVGL-Build)
 rm -f /usr/bin/micropython
-wget https://github.com/daviel/lvgl/releases/download/v9.3.0/micropython \
+wget https://github.com/daviel/lvgl/releases/download/v9.3.0-arm64/micropython \
     -O /usr/bin/micropython
 chmod +x /usr/bin/micropython
 ldconfig
