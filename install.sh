@@ -98,6 +98,7 @@ cp "$CONFIG_DIR/sway.service"         /home/pigo/.config/systemd/user/sway.servi
 cp "$CONFIG_DIR/sway.config"          /home/pigo/.config/sway/config
 
 chown -R pigo:pigo /home/pigo/.config
+chown -R pigo:pigo /opt/pigo
 
 # daemon-reload benötigt einen laufenden systemd – im pi-gen-chroot nicht verfügbar
 systemctl daemon-reload 2>/dev/null || true
