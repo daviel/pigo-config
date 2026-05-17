@@ -21,7 +21,8 @@ apt-get install -y \
     device-tree-compiler \
     libsdl2-2.0-0 \
     mpg123 \
-    pipewire-pulse
+    pipewire-pulse \
+    network-manager
 apt-get --fix-broken install -y
 
 # ── Verzeichnisse ─────────────────────────────────────────────────────────────
